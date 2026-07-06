@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indiasrilankaescapes — Where does your soul want to go?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF6EC;
+    --sand:#F1E7D2;
+    --ink:#241F19;
+    --ink-soft:#5B564C;
+    --gold:#BD8A2E;
+    --gold-deep:#8E6620;
+    --terracotta:#BE5334;
+    --green:#33503F;
+    --green-deep:#233A2D;
+    --line:#E4D9C1;
+    --white:#FFFFFF;
+    --radius:2px;
+    --serif:'Fraunces', serif;
+    --sans:'Work Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;cursor:pointer;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,246,236,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 0;gap:24px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;flex-shrink:0;cursor:pointer;}
+  .logo svg{width:34px;height:34px;flex-shrink:0;}
+  .logo .wordmark{font-family:var(--serif);font-size:20px;letter-spacing:0.2px;}
+  .logo .wordmark em{font-style:normal;color:var(--terracotta);}
+  .logo .tagline{display:block;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-soft);margin-top:1px;}
+
+  nav.primary{display:flex;gap:30px;align-items:center;flex:1;justify-content:center;}
+  nav.primary .item{position:relative;font-size:14.5px;padding:6px 0;}
+  nav.primary .item.has-drop:hover .dropdown{display:block;}
+  nav.primary a.top-link{display:flex;align-items:center;gap:4px;}
+  .dropdown{
+    display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    background:var(--white);border:1px solid var(--line);min-width:190px;
+    padding:8px;margin-top:10px;box-shadow:0 12px 28px rgba(36,31,25,0.08);
+  }
+  .dropdown a{display:block;padding:9px 12px;font-size:13.5px;white-space:nowrap;}
+  .dropdown a:hover{background:var(--sand);color:var(--terracotta);}
+
+  .nav-right{display:flex;align-items:center;gap:20px;flex-shrink:0;}
+  .phone{display:flex;flex-direction:column;line-height:1.2;font-size:12.5px;text-align:right;}
+  .phone strong{font-size:14.5px;font-weight:500;}
+  .phone span{color:var(--ink-soft);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:var(--radius);font-size:13px;font-weight:500;
+    letter-spacing:0.4px;text-transform:uppercase;border:1px solid transparent;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-gold{background:var(--gold);color:var(--white);}
+  .btn-gold:hover{background:var(--gold-deep);}
+  .btn-outline{background:transparent;border-color:var(--ink);color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--white);}
+  .btn-line{background:transparent;border-color:rgba(255,255,255,0.5);color:var(--white);}
+  .btn-line:hover{background:rgba(255,255,255,0.15);}
+  .menu-toggle{display:none;}
+
+  /* ---------- Hero (home) ---------- */
+  .hero{position:relative;padding:76px 0 64px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;}
+  .eyebrow-script{font-family:var(--serif);font-style:italic;font-weight:400;font-size:26px;color:var(--terracotta);margin:0 0 2px;}
+  h1.display{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.08;margin:0 0 20px;letter-spacing:-0.5px;}
+  .rule{width:64px;height:2px;background:var(--gold);margin:22px 0;border:none;}
+  p.lede{font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:440px;margin:0 0 28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  .route-badge{
+    position:absolute;top:64px;right:32px;background:var(--white);
+    border:1px solid var(--line);padding:12px 18px;text-align:center;
+    box-shadow:0 10px 24px rgba(36,31,25,.08);
+  }
+  .route-badge .num{font-family:var(--serif);font-size:20px;color:var(--terracotta);display:block;}
+  .route-badge .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-soft);}
+  .route-badge .stars{color:var(--gold);font-size:12px;margin-top:4px;}
+
+  /* map svg */
+  .map-wrap{position:relative;}
+
+  /* ---------- Destination cards ---------- */
+  .section{padding:64px 0;}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:30px;gap:20px;flex-wrap:wrap;}
+  .section-head h2{font-family:var(--serif);font-size:30px;font-weight:500;margin:0;}
+  .section-head p{color:var(--ink-soft);font-size:14.5px;max-width:460px;margin:6px 0 0;}
+  .eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:2px;color:var(--terracotta);font-weight:600;margin:0 0 6px;}
+
+  .dest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .dest-card{
+    position:relative;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;
+    cursor:pointer;background:var(--ink);color:var(--white);
+  }
+  .dest-card .art{position:absolute;inset:0;}
+  .dest-card .scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(36,31,25,0) 40%, rgba(20,17,13,0.86) 100%);}
+  .dest-card .content{position:absolute;left:0;right:0;bottom:0;padding:18px;}
+  .dest-card .icon-badge{
+    width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;margin-bottom:10px;
+  }
+  .dest-card .icon-badge svg{width:19px;height:19px;stroke:#fff;}
+  .dest-card h3{font-family:var(--serif);font-size:19px;margin:0 0 2px;letter-spacing:0.3px;}
+  .dest-card .sub{font-size:11.5px;color:rgba(255,255,255,0.78);margin:0;}
+  .dest-card .explore{display:flex;align-items:center;gap:6px;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-top:10px;color:#EAD9A6;}
+  .dest-card:hover .explore{gap:10px;transition:gap .2s ease;}
+
+  /* value strip */
+  .value-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .value-item{background:var(--cream);padding:26px 22px;display:flex;gap:14px;align-items:flex-start;}
+  .value-item svg{width:26px;height:26px;stroke:var(--terracotta);flex-shrink:0;margin-top:2px;}
+  .value-item h4{font-size:14px;margin:0 0 4px;font-weight:600;}
+  .value-item p{font-size:12.5px;color:var(--ink-soft);margin:0;line-height:1.5;}
+
+  /* experiences */
+  .exp-band{background:var(--green-deep);color:var(--white);padding:64px 0;}
+  .exp-band .section-head h2, .exp-band .eyebrow{color:var(--white);}
+  .exp-band .eyebrow{color:#D9C98B;}
+  .exp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  .exp-tile{aspect-ratio:1/1.05;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:10px;}
+  .exp-tile svg{width:26px;height:26px;stroke:#D9C98B;}
+  .exp-tile span{font-size:12.5px;letter-spacing:0.3px;}
+
+  .cta-banner{
+    margin-top:44px;background:var(--terracotta);color:var(--white);
+    padding:40px 44px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .cta-banner .eyebrow-script{color:#F6DDBC;}
+  .cta-banner h3{font-family:var(--serif);font-size:26px;font-weight:500;margin:6px 0 0;}
+  .cta-banner .actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  .trust-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .trust-item{background:var(--sand);padding:24px 18px;text-align:center;}
+  .trust-item svg{width:24px;height:24px;stroke:var(--green);margin:0 auto 10px;}
+  .trust-item h5{font-size:12.5px;margin:0 0 3px;font-weight:600;}
+  .trust-item p{font-size:11px;color:var(--ink-soft);margin:0;}
+
+  footer.site{background:var(--ink);color:#CBC4B5;padding:48px 0 24px;font-size:13px;}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px;}
+  .foot-grid h5{color:var(--white);font-size:13px;letter-spacing:0.5px;text-transform:uppercase;margin:0 0 14px;}
+  .foot-grid a{display:block;color:#B9B1A0;margin-bottom:9px;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#8B8474;font-size:12px;}
+
+  /* ---------- Destination detail page ---------- */
+  .breadcrumb{font-size:12.5px;color:var(--ink-soft);padding:16px 0;}
+  .breadcrumb a:hover{color:var(--terracotta);}
+  .d-hero{position:relative;padding:56px 0 44px;color:var(--white);overflow:hidden;}
+  .d-hero .bg{position:absolute;inset:0;z-index:0;}
+  .d-hero .bg .scrim{position:absolute;inset:0;background:linear-gradient(100deg, rgba(20,17,13,0.82) 20%, rgba(20,17,13,0.35) 75%);}
+  .d-hero .inner{position:relative;z-index:1;max-width:640px;}
+  .d-hero .eyebrow-script{color:#F6DDBC;}
+  .d-hero h1{font-family:var(--serif);font-size:46px;font-weight:500;margin:0 0 8px;}
+  .d-hero .route{font-size:14.5px;color:#EADFC8;letter-spacing:0.4px;margin:0 0 16px;}
+  .d-hero p{font-size:15px;line-height:1.7;color:#EDE7DA;margin:0 0 24px;max-width:520px;}
+
+  .fact-bar{background:var(--white);border:1px solid var(--line);margin-top:-30px;position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);}
+  .fact{padding:20px 22px;display:flex;gap:12px;align-items:center;border-right:1px solid var(--line);}
+  .fact:last-child{border-right:none;}
+  .fact svg{width:22px;height:22px;stroke:var(--terracotta);flex-shrink:0;}
+  .fact .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:0.8px;color:var(--ink-soft);}
+  .fact .val{font-size:14px;font-weight:500;}
+
+  .d-body{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:22px;padding:44px 0;align-items:start;}
+  .panel{background:var(--white);border:1px solid var(--line);padding:22px;}
+  .panel h4{font-family:var(--serif);font-size:16.5px;font-weight:500;margin:0 0 4px;}
+  .panel .u{width:30px;height:2px;background:var(--gold);border:none;margin:0 0 16px;}
+  .check-list{list-style:none;margin:0;padding:0;}
+  .check-list li{display:flex;gap:9px;font-size:13.5px;padding:7px 0;border-bottom:1px dashed var(--line);align-items:flex-start;}
+  .check-list li:last-child{border-bottom:none;}
+  .check-list li svg{width:15px;height:15px;stroke:var(--green);flex-shrink:0;margin-top:2px;}
+  .perfect-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .perfect-list li{font-size:12px;background:var(--sand);padding:6px 11px;border:1px solid var(--line);}
+
+  .itinerary{list-style:none;margin:0;padding:0;position:relative;}
+  .itinerary::before{content:"";position:absolute;left:13px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .itin-day{display:flex;gap:14px;padding-bottom:20px;position:relative;}
+  .itin-day:last-child{padding-bottom:0;}
+  .itin-day .dot{width:27px;height:27px;border-radius:50%;background:var(--terracotta);color:var(--white);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;z-index:1;}
+  .itin-day h5{font-size:14px;margin:0 0 4px;font-weight:600;}
+  .itin-day p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.6;}
+
+  .addon-list, .hotel-list{list-style:none;margin:0;padding:0;}
+  .addon-item, .hotel-item{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);}
+  .addon-item:last-child, .hotel-item:last-child{border-bottom:none;}
+  .thumb{width:52px;height:52px;flex-shrink:0;background:var(--sand);display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+  .thumb svg{width:22px;height:22px;stroke:var(--terracotta);}
+  .addon-item .name{font-size:13.5px;font-weight:500;}
+  .addon-item .tag{font-size:11.5px;color:var(--ink-soft);}
+  .hotel-item .name{font-size:13.5px;font-weight:500;}
+  .hotel-item .loc{font-size:11.5px;color:var(--ink-soft);}
+  .hotel-item .stars{color:var(--gold);font-size:11px;margin-top:2px;}
+  .view-all{display:block;text-align:center;margin-top:14px;font-size:12px;text-transform:uppercase;letter-spacing:0.8px;padding:10px;border:1px solid var(--ink);}
+  .view-all:hover{background:var(--ink);color:var(--white);}
+
+  .quote-panel{grid-column:1/3;}
+  .quote-panel .quote{font-family:var(--serif);font-style:italic;font-size:15.5px;line-height:1.6;color:var(--ink);margin:0 0 14px;}
+  .quote-author{font-size:12.5px;color:var(--ink-soft);}
+
+  .d-cta{grid-column:3/5;background:var(--ink);color:var(--white);padding:26px;display:flex;flex-direction:column;justify-content:center;gap:14px;}
+  .d-cta h4{font-family:var(--serif);font-size:20px;font-weight:500;margin:0;color:var(--white);}
+  .d-cta .actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .route-badge{display:none;}
+    .dest-grid{grid-template-columns:repeat(3,1fr);}
+    .exp-grid{grid-template-columns:repeat(3,1fr);}
+    .value-strip{grid-template-columns:repeat(2,1fr);}
+    .trust-bar{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .d-body{grid-template-columns:1fr 1fr;}
+    .quote-panel, .d-cta{grid-column:1/3;}
+    nav.primary{display:none;}
+  }
+  @media (max-width: 620px){
+    .wrap{padding:0 18px;}
+    h1.display{font-size:36px;}
+    .dest-grid{grid-template-columns:repeat(2,1fr);}
+    .exp-grid{grid-template-columns:repeat(2,1fr);}
+    .value-strip{grid-template-columns:1fr;}
+    .trust-bar{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .d-body{grid-template-columns:1fr;}
+    .quote-panel, .d-cta{grid-column:1/2;}
+    .fact-bar{grid-template-columns:1fr 1fr;}
+    .fact{border-bottom:1px solid var(--line);}
+    .nav-right .phone{display:none;}
+    .d-hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="logo" onclick="navigate('home')">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 30c0-8 5-14 13-14 9 0 13 6 13 6s3-4 7-2c3 1.5 3 5 1 6-2 1-4 0-4 0" stroke="#BD8A2E" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M10 30v6c0 1.3 1 2.4 2.3 2.4h1.4c1.3 0 2.3-1 2.3-2.4v-4" stroke="#BD8A2E" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M27 30v6c0 1.3 1 2.4 2.3 2.4h1.4c1.3 0 2.3-1 2.3-2.4v-6" stroke="#BD8A2E" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="14" cy="20" r="1.3" fill="#BD8A2E"/>
+      </svg>
+      <div>
+        <span class="wordmark">indiasrilanka<em>escapes</em></span>
+        <span class="tagline">Crafting unforgettable journeys</span>
+      </div>
+    </div>
+
+    <nav class="primary">
+      <div class="item has-drop">
+        <a class="top-link" href="#">Destinations ▾</a>
+        <div class="dropdown">
+          <a href="#" onclick="navigate('golden-triangle');return false;">Golden Triangle</a>
+          <a href="#" onclick="navigate('kerala');return false;">Kerala</a>
+          <a href="#" onclick="navigate('goa');return false;">Goa</a>
+          <a href="#" onclick="navigate('tamil-nadu');return false;">Tamil Nadu</a>
+          <a href="#" onclick="navigate('wildlife');return false;">Wildlife</a>
+          <a href="#" onclick="navigate('ayurveda');return false;">Ayurveda Wellness</a>
+        </div>
+      </div>
+      <div class="item"><a href="#">Experiences</a></div>
+      <div class="item"><a href="#">Holidays</a></div>
+      <div class="item"><a href="#">Hotels</a></div>
+      <div class="item"><a href="#">Travel Guide</a></div>
+      <div class="item"><a href="#">About Us</a></div>
+      <div class="item"><a href="#">Contact</a></div>
+    </nav>
+
+    <div class="nav-right">
+      <div class="phone">
+        <strong>+44 20 1234 5678</strong>
+        <span>Speak to our India experts</span>
+      </div>
+      <a class="btn btn-gold" href="#">Enquire Now</a>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="wordmark" style="font-family:var(--serif);font-size:19px;color:#fff;">indiasrilanka<em style="color:var(--gold)">escapes</em></span>
+        <p style="color:#9C9484;font-size:13px;line-height:1.7;max-width:280px;margin-top:12px;">Tailor-made journeys across India and Sri Lanka, crafted by local experts who know every temple, tea garden and tiger trail.</p>
+      </div>
+      <div>
+        <h5>Destinations</h5>
+        <a href="#" onclick="navigate('golden-triangle');return false;">Golden Triangle</a>
+        <a href="#" onclick="navigate('kerala');return false;">Kerala</a>
+        <a href="#" onclick="navigate('goa');return false;">Goa</a>
+        <a href="#" onclick="navigate('tamil-nadu');return false;">Tamil Nadu</a>
+      </div>
+      <div>
+        <h5>Experiences</h5>
+        <a href="#" onclick="navigate('wildlife');return false;">Wildlife Safaris</a>
+        <a href="#" onclick="navigate('ayurveda');return false;">Ayurveda and Spa</a>
+        <a href="#">Spiritual Journeys</a>
+        <a href="#">Culture and Food</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Travel Guide</a>
+        <a href="#">Contact</a>
+        <a href="#">ATOL and ABTA</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Indiasrilankaescapes. All rights reserved.</span>
+      <span>ATOL Protected · ABTA Member · Registered in England</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------- Icon library (monoline, stroke=currentColor) ---------------- */
+const ICONS = {
+  arch:`<path d="M4 20V11a8 8 0 0 1 16 0v9" /><path d="M4 20h16" /><path d="M9 20v-6h6v6" />`,
+  palm:`<path d="M12 21V11" /><path d="M12 11c-2-3-6-3-8-1 2 2 5 2 8 1Z" /><path d="M12 11c2-3 6-3 8-1-2 2-5 2-8 1Z" /><path d="M12 11c0-3-2-5-4-6 3-1 5 1 4 6Z" /><path d="M12 11c0-3 2-5 4-6-3-1-5 1-4 6Z" />`,
+  boat:`<path d="M3 16h18l-2 4H5l-2-4Z" /><path d="M6 16V9c0-1 1-2 2-2h8c1 0 2 1 2 2v7" /><path d="M12 7V3" /><path d="M12 3h3v2h-3" />`,
+  paw:`<circle cx="8" cy="8" r="1.6" /><circle cx="13" cy="6.5" r="1.6" /><circle cx="17.5" cy="9.5" r="1.6" /><path d="M12.5 12c2.5 0 5 2 5 4.3 0 1.9-1.6 2.7-3.3 2.1-1-.4-2.3-.4-3.3 0-1.7.6-3.3-.2-3.3-2.1 0-2.3 2.4-4.3 4.9-4.3Z" />`,
+  lotus:`<path d="M12 21c-4-2-6-6-6-9 3 0 5 2 6 5 1-3 3-5 6-5 0 3-2 7-6 9Z" /><path d="M12 12V4" /><path d="M8 8c1.5 0 3 1 4 2" /><path d="M16 8c-1.5 0-3 1-4 2" />`,
+  temple:`<path d="M12 3l2 3H10l2-3Z" /><path d="M9 6h6v2H9z" /><path d="M6 8h12v3H6z" /><path d="M8 11v9M12 11v9M16 11v9" /><path d="M4 20h16" />`,
+  compass:`<circle cx="12" cy="12" r="9" /><path d="M15 9l-2 6-4 2 2-6 4-2Z" />`,
+  bell:`<path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16l-2-3Z" /><path d="M10 20a2 2 0 0 0 4 0" />`,
+  user:`<circle cx="12" cy="8" r="3.5" /><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5" />`,
+  shield:`<path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3Z" /><path d="M9 12l2 2 4-4" />`,
+  clock:`<circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" />`,
+  tag:`<path d="M20 12l-8 8-9-9V4h7l10 8Z" /><circle cx="7.5" cy="7.5" r="1.3" />`,
+  heart:`<path d="M12 20s-7-4.4-9.3-9C1.2 7.6 3 4 6.6 4c2 0 3.4 1.2 4.4 2.7C12 5.2 13.4 4 15.4 4 19 4 20.8 7.6 19.3 11c-2.3 4.6-9.3 9-9.3 9Z" />`,
+  star:`<path d="M12 3l2.6 5.6 6 0.7-4.4 4.1 1.2 6-5.4-3-5.4 3 1.2-6L3.4 9.3l6-0.7L12 3Z" />`,
+  leaf:`<path d="M5 19c0-8 5-14 14-14 0 8-5 14-14 14Z" /><path d="M5 19c3-4 6-7 12-11" />`,
+  route:`<circle cx="6" cy="6" r="2" /><circle cx="18" cy="18" r="2" /><path d="M6 8v3a4 4 0 0 0 4 4h2a4 4 0 0 1 4 4v1" stroke-dasharray="2 3"/>`,
+  sun:`<circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />`,
+  car:`<path d="M4 16l1.5-5A2 2 0 0 1 7.4 9.5h9.2a2 2 0 0 1 1.9 1.5L20 16" /><rect x="3" y="16" width="18" height="4" rx="1" /><circle cx="7.5" cy="20" r="1.2" /><circle cx="16.5" cy="20" r="1.2" />`,
+  calendar:`<rect x="3.5" y="5" width="17" height="15" rx="1" /><path d="M3.5 9.5h17" /><path d="M8 3v4M16 3v4" />`,
+  spa:`<path d="M12 21c-4-1-6-4-6-8 3 0 6 2 6 6 0-4 3-6 6-6 0 4-2 7-6 8Z" /><path d="M12 13V4" /><circle cx="12" cy="4" r="1.2" />`,
+  waves:`<path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M2 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0" />`
+};
+function icon(name, size=20){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="${size}" height="${size}">${ICONS[name]||ICONS.compass}</svg>`; }
+
+/* Real photography per destination (Wikimedia Commons, CC-licensed), used behind hero + cards */
+const PHOTOS = {
+  arch:   "https://commons.wikimedia.org/wiki/Special:FilePath/Taj%20Mahal%20Front.JPG?width=1400",
+  boat:   "https://commons.wikimedia.org/wiki/Special:FilePath/Kerala%20backwaters%2C%20Vembanad%20Lake%2C%20Houseboats%2C%20India.jpg?width=1400",
+  palm:   "https://commons.wikimedia.org/wiki/Special:FilePath/Goa%20beautiful%20beach.JPG?width=1400",
+  temple: "https://commons.wikimedia.org/wiki/Special:FilePath/Meenakshi%20Amman%20Temple%2C%20Madurai.JPG?width=1400",
+  tiger:  "https://commons.wikimedia.org/wiki/Special:FilePath/RANTHAMBORE%20TIGER%20RESERVE.jpg?width=1400",
+  lotus:  "https://commons.wikimedia.org/wiki/Special:FilePath/Elephant%20pass%20ayurveda%20and%20yoga%20retreat%20kerala%20Ayurveda%20resort%20kerala.jpg?width=1400"
+};
+function artBackdrop(key){
+  return `<img src="${PHOTOS[key]||PHOTOS.arch}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+}
+
+/* ---------------- Data ---------------- */
+const DESTINATIONS = {
+  "golden-triangle": {
+    label:"Golden Triangle", route:"Delhi · Agra · Jaipur", tagline:"India's Most Iconic Journey", art:"arch", tint:"#EADFC4",
+    desc:"Discover India's most celebrated circuit connecting three magnificent cities steeped in history, culture and royal heritage. From the timeless beauty of the Taj Mahal to the vibrant colours of Jaipur, this journey offers unforgettable experiences at every step.",
+    facts:{best:"Oct to Mar", weather:"15°C – 30°C", travel:"Delhi to Agra, 3–4 hrs", duration:"6 Days / 5 Nights"},
+    highlights:["Sunrise visit to the Taj Mahal","Explore Old Delhi and Chandni Chowk","Amber Fort and elephant ride in Jaipur","UNESCO World Heritage sites","Royal palaces, forts and havelis","Vibrant markets and local experiences"],
+    itinerary:[
+      {t:"Arrival in Delhi", d:"Arrive in Delhi and transfer to your hotel. Rest of the day at leisure or explore nearby markets. Overnight in Delhi."},
+      {t:"Discover Delhi", d:"Full-day sightseeing of Old and New Delhi, including Red Fort, Jama Masjid, Raj Ghat, India Gate and Qutub Minar. Overnight in Delhi."},
+      {t:"Delhi to Agra (210 km / 3–4 hrs)", d:"Drive to Agra and visit the magnificent Taj Mahal. Later explore Agra Fort and local markets. Overnight in Agra."},
+      {t:"Agra to Jaipur (via Fatehpur Sikri)", d:"Drive to Jaipur, en route visiting Fatehpur Sikri. Check in to your hotel. Evening at leisure. Overnight in Jaipur."},
+      {t:"Explore Jaipur", d:"Visit Amber Fort with an elephant or jeep ride, City Palace, Jantar Mantar and Hawa Mahal. Evening free for shopping in local bazaars. Overnight in Jaipur."},
+      {t:"Departure", d:"After breakfast, drive to Delhi airport for your onward journey with wonderful memories."}
+    ],
+    addons:["Varanasi — Spiritual India","Udaipur — City of Lakes","Ranthambore — Tiger Safari","Goa — Beach Paradise","Kerala — Backwaters and Nature","Rishikesh — Yoga and Spirituality"],
+    hotels:[["ITC Grand Bharat","Gurugram",5],["The Leela Palace","New Delhi",5],["Taj Hotel and Convention Centre","Agra",5],["Rambagh Palace","Jaipur",5]],
+    quote:"The Golden Triangle tour was perfectly organised from start to finish. Our driver and guides were excellent and the Taj Mahal at sunrise was magical.",
+    author:"Sarah and David, London"
+  },
+  "kerala": {
+    label:"Kerala", route:"Kochi · Munnar · Alleppey", tagline:"God's Own Country", art:"boat", tint:"#DCE6D0",
+    desc:"Discover enchanting backwaters, lush hill stations, serene beaches and rejuvenating Ayurveda wellness. Kerala's natural beauty and warm hospitality make it a truly unforgettable experience.",
+    facts:{best:"Sep to Mar", weather:"20°C – 30°C", travel:"Varies by destination", duration:"5 Days / 4 Nights"},
+    highlights:["Backwaters and houseboat stay","Hill stations and tea gardens","Ayurveda wellness and spa","Wildlife and nature","Beaches and coastal beauty"],
+    itinerary:[
+      {t:"Arrival in Kochi", d:"Arrive in Kochi and explore Fort Kochi, Chinese fishing nets, St. Francis Church and Jew Town. Overnight in Kochi."},
+      {t:"Munnar Hill Station", d:"Drive to Munnar. En route, visit tea gardens and waterfalls. Explore the Tea Museum and enjoy the cool climate. Overnight in Munnar."},
+      {t:"Thekkady Wildlife", d:"Drive to Thekkady. Visit Periyar Wildlife Sanctuary and enjoy a boat safari. Explore spice plantations. Overnight in Thekkady."},
+      {t:"Alleppey Houseboat", d:"Drive to Alleppey and board your luxury houseboat. Cruise through the serene backwaters. Overnight onboard the houseboat."},
+      {t:"Departure", d:"After breakfast, disembark and transfer to Cochin Airport for your onward journey."}
+    ],
+    addons:["Goa — Beach Paradise","Karnataka — Heritage and Nature","Lakshadweep — Tropical Bliss","Sri Lanka — Island Adventure"],
+    hotels:[["Taj Malabar Resort and Spa","Kochi",5],["The Leela Kovalam","Kovalam",5],["Brunton Boatyard","Kochi",5],["Spice Village Resort","Thekkady",5]],
+    quote:"Gliding through the backwaters on our own houseboat was unlike anything we had done before. Kerala is a feast for the senses.",
+    author:"Emma R., Manchester"
+  },
+  "goa": {
+    label:"Goa", route:"North Goa · South Goa", tagline:"Sun, Sand and Serenity", art:"palm", tint:"#F3E4C6",
+    desc:"Experience the perfect blend of pristine beaches, vibrant culture, Portuguese heritage and world-class hospitality. From thrilling water sports to laid-back beach vibes, Goa is your ultimate tropical getaway.",
+    facts:{best:"Nov to Feb", weather:"18°C – 32°C", travel:"Pan Goa local travel", duration:"4 Days / 3 Nights"},
+    highlights:["Pristine beaches","Water sports and adventure","Nightlife and beach clubs","Portuguese heritage and culture","Local markets and Goan cuisine"],
+    itinerary:[
+      {t:"Arrival in Goa", d:"Arrive in Goa and transfer to your hotel. Spend the evening at leisure on the beach. Overnight in Goa."},
+      {t:"North Goa Exploration", d:"Explore North Goa — Fort Aguada, Anjuna Beach, Vagator Beach and the famous Chapora Fort. Overnight in Goa."},
+      {t:"South Goa and Heritage", d:"Visit the Basilica of Bom Jesus, Se Cathedral and Old Goa church. Relax at Palolem or Colva Beach. Overnight in Goa."},
+      {t:"Departure", d:"After breakfast, enjoy some leisure time before transferring to the airport for your onward journey."}
+    ],
+    addons:["Mumbai — City of Dreams","Kerala — Backwaters and Ayurveda","Rajasthan — Royal Heritage","Sri Lanka — Island Paradise"],
+    hotels:[["ITC Grand Goa","Premium Luxury",5],["The St. Regis Goa","Beach Resort",5],["W Goa","Vagator",5],["Grand Hyatt Goa","Bambolim",5]],
+    quote:"Sunsets on the beach, incredible seafood and just the right mix of chill and adventure. Goa delivered on every front.",
+    author:"James H., Bristol"
+  },
+  "tamil-nadu": {
+    label:"Tamil Nadu", route:"Chennai · Madurai · Kodaikanal", tagline:"Temples, Traditions and Timeless Heritage", art:"temple", tint:"#E7D6B8",
+    desc:"Discover the soul of South India with its magnificent temples, rich traditions, classical arts, serene hill stations and pristine beaches. Tamil Nadu offers a perfect blend of spirituality, culture, history and natural beauty.",
+    facts:{best:"Oct to Mar", weather:"20°C – 32°C", travel:"Varies by destination", duration:"6 Days / 5 Nights"},
+    highlights:["Magnificent temple architecture","UNESCO World Heritage sites","Classical dance and music","Scenic hill stations","Pristine beaches and backwaters"],
+    itinerary:[
+      {t:"Arrival in Chennai", d:"Arrive in Chennai and transfer to your hotel. Explore Marina Beach, Kapaleeshwarar Temple and local markets. Overnight in Chennai."},
+      {t:"Chennai to Mahabalipuram to Pondicherry", d:"Drive to Mahabalipuram, visit Shore Temple and Pancha Rathas. Continue to Pondicherry and explore the French Quarter. Overnight in Pondicherry."},
+      {t:"Pondicherry to Thanjavur", d:"Drive to Thanjavur, visit Brihadeeswarar Temple (UNESCO site) and Thanjavur Palace. Explore local art and crafts. Overnight in Thanjavur."},
+      {t:"Thanjavur to Madurai", d:"Drive to Madurai, visit Meenakshi Amman Temple and Thirumalai Nayakkar Palace. Experience the evening aarti. Overnight in Madurai."},
+      {t:"Madurai to Kodaikanal", d:"Drive to Kodaikanal, a serene hill station. Enjoy boating at Kodaikanal Lake and visit Coaker's Walk. Overnight in Kodaikanal."},
+      {t:"Depart from Madurai", d:"After breakfast, transfer to Madurai Airport or Railway Station for your onward journey."}
+    ],
+    addons:["Rameswaram — Spiritual Island","Ooty — Queen of Hill Stations","Chettinad — Heritage and Mansions","Kanyakumari — Land's End","Yelagiri — Offbeat Hills"],
+    hotels:[["Taj Coromandel","Chennai",5],["The Banyan Tree","Pondicherry",5],["Svatma","Thanjavur",5],["Heritage Madurai","Madurai",4],["The Tamara Kodai","Kodaikanal",5]],
+    quote:"The temples of Tamil Nadu are on another scale entirely. Our guide brought every carving and ritual to life.",
+    author:"Priya N., Leicester"
+  },
+  "wildlife": {
+    label:"Wildlife", route:"Ranthambore · Jim Corbett · Kanha", tagline:"Into the Heart of Nature", art:"tiger", tint:"#E3E0C4",
+    desc:"Embark on thrilling wildlife safaris and discover India's incredible biodiversity. From majestic tigers and elephants to exotic birds and rare species, every moment brings you closer to nature.",
+    facts:{best:"Oct to Jun", weather:"15°C – 35°C", travel:"Varies by destination", duration:"4 Nights Onwards"},
+    highlights:["Thrilling wildlife safaris","Tiger spotting in natural habitat","Bird watching and nature walks","Expert naturalist guides","Photography opportunities","Conservation and responsible tourism"],
+    itinerary:[
+      {t:"Arrival and Wildlife Orientation", d:"Arrive at the airport and transfer to your resort near the wildlife sanctuary. Nature walk and briefing with your naturalist."},
+      {t:"Safari Adventure", d:"Early morning jeep safari in the national park. Spot tigers, leopards, deer and a variety of birds. Evening at leisure."},
+      {t:"Explore and Experience", d:"Morning safari and visit to interpretation centre or local village. Learn about conservation efforts and local culture."},
+      {t:"Another Safari", d:"Enjoy a boat safari or jungle safari. Capture stunning wildlife moments and unwind in nature."},
+      {t:"Departure", d:"After breakfast, transfer to the airport or station for your onward journey with unforgettable memories."}
+    ],
+    addons:["Ranthambore — Tiger Safari","Jim Corbett — India's Oldest National Park","Kanha — Land of the Barasingha","Bandhavgarh — High Tiger Density","Kaziranga — One-Horned Rhino Safari"],
+    hotels:[["Jawai Leopard Camp","Rajasthan",5],["The Oberoi Vanyavilas","Ranthambore",5],["Aahana — The Corbett Wilderness","Jim Corbett",5],["Kanha Earth Lodge","Kanha",5],["The Diphlu River Lodge","Kaziranga",5]],
+    quote:"Watching a tiger walk right past our jeep at sunrise in Ranthambore is a memory that will stay with us forever.",
+    author:"Tom and Lucy, Edinburgh"
+  },
+  "ayurveda": {
+    label:"Ayurveda Wellness", route:"Kerala · Rishikesh · Sri Lanka", tagline:"Rejuvenate. Restore. Rebalance.", art:"lotus", tint:"#DFE4CE",
+    desc:"Discover the ancient healing wisdom of Ayurveda in India and Sri Lanka. Unwind with holistic therapies, detox programs and rejuvenating spa retreats set in serene surroundings.",
+    facts:{best:"Oct to Apr", weather:"18°C – 32°C", travel:"Mind · Body · Soul", duration:"5 Days / 4 Nights Onwards"},
+    highlights:["Authentic Ayurveda treatments","Panchakarma detox programs","Yoga and meditation sessions","Herbal therapies and massage","Wellness cuisine and lifestyle guidance","Peaceful natural surroundings"],
+    itinerary:[
+      {t:"Arrival and Consultation", d:"Arrive and check in to your wellness resort. Undergo a consultation with an Ayurveda doctor and enjoy a relaxing therapy."},
+      {t:"Detox and Rejuvenate", d:"Begin your personalised wellness program with therapies, yoga and a balanced Ayurvedic diet."},
+      {t:"Mind and Body Balance", d:"Experience yoga, meditation and holistic treatments designed to balance your body and mind."},
+      {t:"Healing and Relaxation", d:"Continue therapies and enjoy leisure time amidst nature. Optional spa or cultural experiences."},
+      {t:"Departure", d:"After breakfast, check out and depart with renewed energy and inner peace."}
+    ],
+    addons:["Kerala — Ayurveda Capital of India","Rishikesh — Yoga and Wellness Retreats","Coimbatore — Nature and Naturopathy","Sri Lanka — Ayurveda and Wellness","Goa — Wellness by the Beach"],
+    hotels:[["Somatheeram Ayurveda Resort","Kerala",5],["Carnoustie Ayurveda and Wellness Resort","Kerala",5],["Ananda in the Himalayas","Uttarakhand",5],["The Dune Eco Village and Spa","Tamil Nadu",5],["Jetwing Ayurveda Pavilions","Sri Lanka",5]],
+    quote:"Five days of treatments, yoga and quiet left us feeling more restored than any holiday we've taken before.",
+    author:"Claire M., Cardiff"
+  }
+};
+
+const HOME_CARDS = [
+  {slug:"golden-triangle", icon:"arch", label:"Golden Triangle", sub:"Delhi · Agra · Jaipur"},
+  {slug:"goa", icon:"palm", label:"Goa", sub:"Beaches and Luxury Resorts"},
+  {slug:"kerala", icon:"boat", label:"Kerala", sub:"Backwaters and Ayurveda"},
+  {slug:"wildlife", icon:"paw", label:"Wildlife", sub:"Tiger Safaris"},
+  {slug:"tamil-nadu", icon:"temple", label:"Spiritual India", sub:"Temples and Sacred Journeys"}
+];
+
+const EXPERIENCES = [
+  {icon:"compass", label:"Adventure"},
+  {icon:"waves", label:"Luxury"},
+  {icon:"user", label:"Culture"},
+  {icon:"paw", label:"Wildlife"},
+  {icon:"spa", label:"Spiritual"},
+  {icon:"leaf", label:"Food"}
+];
+
+/* ---------------- Render: Home ---------------- */
+function renderHome(){
+  return `
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow-script">Where does</p>
+        <h1 class="display">your soul want<br>to go?</h1>
+        <hr class="rule">
+        <p class="lede">Choose the destination that inspires you most. Explore in detail, including the best time to visit, local cuisine, must-try experiences and much more.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#">Enquire Now</a>
+          <a class="btn btn-outline" href="#" onclick="navigate('golden-triangle');return false;">${icon('route',16)} See a Sample Journey</a>
+        </div>
+      </div>
+      <div class="map-wrap" style="position:relative;">
+        <img src="${PHOTOS.arch}" alt="Taj Mahal at sunrise" style="width:100%;height:400px;object-fit:cover;border-radius:2px;">
+        <div class="route-badge">
+          <span class="num">10,000+</span>
+          <span class="lbl">Happy travellers</span>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">Pick your path</p><h2>Explore by destination</h2></div>
+      </div>
+      <div class="dest-grid">
+        ${HOME_CARDS.map(c=>`
+          <div class="dest-card" onclick="navigate('${c.slug}')">
+            <div class="art">${artBackdrop(c.icon)}</div>
+            <div class="scrim"></div>
+            <div class="content">
+              <div class="icon-badge">${icon(c.icon,19)}</div>
+              <h3>${c.label}</h3>
+              <p class="sub">${c.sub}</p>
+              <div class="explore">Explore ${icon('route',12)}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="value-strip">
+      <div class="value-item">${icon('compass')}<div><h4>Tailor-made holidays</h4><p>Every itinerary is crafted around your interests, style and budget.</p></div></div>
+      <div class="value-item">${icon('bell')}<div><h4>Premium stays</h4><p>Handpicked luxury hotels and resorts for exceptional comfort and service.</p></div></div>
+      <div class="value-item">${icon('user')}<div><h4>Local experts</h4><p>UK-friendly travel specialists available before, during and after your trip.</p></div></div>
+      <div class="value-item">${icon('shield')}<div><h4>Trusted and secure</h4><p>ATOL protected, financially secure and trusted by travellers across the UK.</p></div></div>
+    </div>
+  </div>
+
+  <section class="exp-band">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">A journey for every mood</p><h2>Explore experiences</h2></div>
+      </div>
+      <div class="exp-grid">
+        ${EXPERIENCES.map(e=>`<div class="exp-tile">${icon(e.icon,26)}<span>${e.label}</span></div>`).join('')}
+      </div>
+      <div class="cta-banner">
+        <div>
+          <p class="eyebrow-script" style="margin:0;">India is calling.</p>
+          <h3>Let's plan your escape.</h3>
+        </div>
+        <div class="actions">
+          <a class="btn btn-gold" href="#">Enquire Now</a>
+          <a class="btn btn-line" href="tel:+442012345678">Call Us: +44 20 1234 5678</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="trust-item">${icon('user')}<h5>ATOL Protected</h5><p>Travel with complete peace of mind</p></div>
+    <div class="trust-item">${icon('clock')}<h5>24/7 travel support</h5><p>We are here for you anytime</p></div>
+    <div class="trust-item">${icon('tag')}<h5>No hidden costs</h5><p>Transparent pricing, always</p></div>
+    <div class="trust-item">${icon('shield')}<h5>100% financial protection</h5><p>Your money is safe with us</p></div>
+    <div class="trust-item">${icon('star')}<h5>Trusted by travellers</h5><p>Rated excellent on Trustpilot</p></div>
+  </div>
+  `;
+}
+
+function homeMapSVG(){
+  return `<svg viewBox="0 0 420 420" style="width:100%;height:auto;">
+    <path d="M150 40c40-10 90-5 110 20 15 19 10 40 25 55 20 20 15 45-5 70-10 12-8 28-20 45-15 22-10 45-35 65-18 14-45 10-60-5-20-20-10-50-30-70-25-25-30-55-15-90 10-24 5-55 30-90Z" fill="none" stroke="#BD8A2E" stroke-width="1.4" stroke-dasharray="3 4" opacity="0.55"/>
+    <path d="M255 250c15 10 30 30 25 55-4 20-25 35-45 30" fill="none" stroke="#BD8A2E" stroke-width="1.4" stroke-dasharray="3 4" opacity="0.55"/>
+    <circle cx="185" cy="95" r="5" fill="#BE5334"/>
+    <circle cx="205" cy="140" r="5" fill="#BE5334"/>
+    <circle cx="150" cy="230" r="5" fill="#BE5334"/>
+    <circle cx="120" cy="300" r="5" fill="#BE5334"/>
+    <circle cx="235" cy="300" r="5" fill="#33503F"/>
+    <text x="195" y="88" font-family="Work Sans" font-size="11" fill="#241F19">Delhi</text>
+    <text x="215" y="133" font-family="Work Sans" font-size="11" fill="#241F19">Agra</text>
+    <text x="115" y="223" font-family="Work Sans" font-size="11" fill="#241F19">Goa</text>
+    <text x="130" y="294" font-family="Work Sans" font-size="11" fill="#241F19">Kerala</text>
+    <text x="245" y="294" font-family="Work Sans" font-size="11" fill="#241F19">Sri Lanka</text>
+  </svg>`;
+}
+
+/* ---------------- Render: Destination detail ---------------- */
+function renderDestination(slug){
+  const d = DESTINATIONS[slug];
+  if(!d) return renderHome();
+  return `
+  <div class="wrap breadcrumb"><a href="#" onclick="navigate('home');return false;">Home</a> &nbsp;›&nbsp; India &nbsp;›&nbsp; ${d.label}</div>
+
+  <section class="d-hero">
+    <div class="bg">${artBackdropFull(d.art)}<div class="scrim"></div></div>
+    <div class="wrap inner">
+      <p class="eyebrow-script">${d.tagline}</p>
+      <h1>${d.label}</h1>
+      <p class="route">${d.route}</p>
+      <p>${d.desc}</p>
+      <div class="hero-ctas">
+        <a class="btn btn-gold" href="#">Enquire Now</a>
+        <a class="btn btn-line" href="tel:+442012345678">Call Us: +44 20 1234 5678</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="fact-bar">
+      <div class="fact">${icon('calendar')}<div><div class="lbl">Best time to travel</div><div class="val">${d.facts.best}</div></div></div>
+      <div class="fact">${icon('sun')}<div><div class="lbl">Weather</div><div class="val">${d.facts.weather}</div></div></div>
+      <div class="fact">${icon('car')}<div><div class="lbl">Travel</div><div class="val">${d.facts.travel}</div></div></div>
+      <div class="fact">${icon('clock')}<div><div class="lbl">Tour duration</div><div class="val">${d.facts.duration}</div></div></div>
+    </div>
+
+    <div class="d-body">
+      <div class="panel">
+        <h4>Experience highlights</h4><hr class="u">
+        <ul class="check-list">${d.highlights.map(h=>`<li>${icon('leaf',15)}<span>${h}</span></li>`).join('')}</ul>
+      </div>
+
+      <div class="panel">
+        <h4>Suggested itinerary</h4><hr class="u">
+        <ul class="itinerary">${d.itinerary.map((s,i)=>`
+          <li class="itin-day"><div class="dot">${i+1}</div><div><h5>Day ${i+1} — ${s.t}</h5><p>${s.d}</p></div></li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h4>Extend your holiday</h4><hr class="u">
+        <ul class="addon-list">${d.addons.map(a=>{
+          const [name,tag]=a.split(' — ');
+          return `<li class="addon-item"><div class="thumb">${icon('compass',20)}</div><div><div class="name">${name}</div><div class="tag">${tag||''}</div></div></li>`;
+        }).join('')}</ul>
+      </div>
+
+      <div class="panel">
+        <h4>Handpicked hotels</h4><hr class="u">
+        <ul class="hotel-list">${d.hotels.map(h=>`
+          <li class="hotel-item"><div class="thumb">${icon('star',20)}</div><div><div class="name">${h[0]}</div><div class="loc">${h[1]}</div><div class="stars">${'★'.repeat(h[2])}</div></div></li>`).join('')}
+        </ul>
+        <a class="view-all" href="#">View more hotels</a>
+      </div>
+
+      <div class="panel quote-panel">
+        <h4>What our guests say</h4><hr class="u">
+        <p class="quote">"${d.quote}"</p>
+        <p class="quote-author">— ${d.author}</p>
+      </div>
+
+      <div class="d-cta">
+        <h4>Ready to discover ${d.label}?</h4>
+        <p style="margin:0;color:#D7CFBD;font-size:13.5px;">Speak to our specialists and let us craft your perfect tailor-made journey.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#">Plan My Holiday</a>
+          <a class="btn btn-line" href="tel:+442012345678">Speak to an Expert</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-item">${icon('user')}<h5>ATOL Protected</h5><p>Travel with complete peace of mind</p></div>
+    <div class="trust-item">${icon('clock')}<h5>24/7 local support</h5><p>We are here for you anytime</p></div>
+    <div class="trust-item">${icon('tag')}<h5>No hidden costs</h5><p>Transparent pricing, always</p></div>
+    <div class="trust-item">${icon('shield')}<h5>Financial protection</h5><p>Your money is safe with us</p></div>
+    <div class="trust-item">${icon('star')}<h5>Trusted by travellers</h5><p>Rated excellent by our happy travellers</p></div>
+  </div>
+  `;
+}
+
+function artBackdropFull(key){
+  return `<img src="${PHOTOS[key]||PHOTOS.arch}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">`;
+}
+
+/* ---------------- Router ---------------- */
+function navigate(route){
+  window.location.hash = route === 'home' ? '' : route;
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function render(){
+  const hash = window.location.hash.replace('#','');
+  const app = document.getElementById('app');
+  app.innerHTML = (!hash || hash==='home') ? renderHome() : renderDestination(hash);
+}
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
